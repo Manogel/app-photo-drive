@@ -1,3 +1,5 @@
+import MaskCameraOverlay from 'components/MaskCameraOverlay';
+import Masks from 'components/Masks';
 import React from 'react';
 import {
   SafeAreaView,
@@ -10,6 +12,10 @@ import {RNCamera} from 'react-native-camera';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const handleSelectMask = React.useCallback((mask: any) => {
+    console.log(mask);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,8 +35,11 @@ const App = () => {
           message: 'We need your permission to use your audio',
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel',
-        }}
-      />
+        }}>
+        <MaskCameraOverlay />
+      </RNCamera>
+
+      <Masks onSelectMask={handleSelectMask} />
     </SafeAreaView>
   );
 };
