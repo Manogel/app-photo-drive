@@ -10,16 +10,23 @@ const styles = StyleSheet.create({
 
   camIcon: {
     position: 'absolute',
-    bottom: 10,
-    right: 0,
-    left: 0,
+    bottom: 20,
+    alignSelf: 'center',
   },
 });
 
 const MaskCameraOverlay: React.FC = () => {
   return (
     <View style={styles.container}>
-      <ButtonIcon icon={ShutterPhotoIcon} />
+      <ButtonIcon
+        icon={ShutterPhotoIcon}
+        style={styles.camIcon}
+        iconProps={{
+          color: '#fff',
+          height: 60,
+          width: 60,
+        }}
+      />
     </View>
   );
 };
