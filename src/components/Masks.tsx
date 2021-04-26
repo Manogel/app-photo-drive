@@ -8,10 +8,26 @@ import {
   Image,
 } from 'react-native';
 import ArrowDownIcon from './icons/ArrowDown';
-import among_img from 'assets/among.png';
 import ArrowUpIcon from './icons/ArrowUp';
+import img_1 from 'assets/1.png';
+import img_2 from 'assets/2.png';
+import img_3 from 'assets/3.png';
+import img_4 from 'assets/4.png';
+import img_face1 from 'assets/face1.png';
+import img_face2 from 'assets/face2.png';
+import img_face3 from 'assets/face3.png';
+import img_face4 from 'assets/face4.png';
 
-const IMAGES = [among_img, among_img, among_img, among_img];
+const MASKS = [
+  img_1,
+  img_2,
+  img_3,
+  img_4,
+  img_face1,
+  img_face2,
+  img_face3,
+  img_face4,
+];
 
 type MasksParams = {
   onSelectMask(mask: any): void;
@@ -46,9 +62,11 @@ const Masks: React.FC<MasksParams> = ({onSelectMask}) => {
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         keyExtractor={({index}) => index}
-        data={IMAGES}
+        data={MASKS}
         renderItem={({item}) => (
-          <TouchableOpacity activeOpacity={0.8} onPress={onSelectMask}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => onSelectMask(item)}>
             <Image source={item} style={styles.image} />
           </TouchableOpacity>
         )}

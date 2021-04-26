@@ -1,21 +1,19 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Image, ImageSourcePropType} from 'react-native';
 import ButtonIcon from './ButtonIcon';
 import ShutterPhotoIcon from './icons/ShutterPhoto';
 
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-  },
+type MaskCameraOverlayParams = {
+  size?: number;
+  image?: ImageSourcePropType;
+  opacity?: number;
+};
 
-  camIcon: {
-    position: 'absolute',
-    bottom: 20,
-    alignSelf: 'center',
-  },
-});
-
-const MaskCameraOverlay: React.FC = () => {
+const MaskCameraOverlay: React.FC<MaskCameraOverlayParams> = ({
+  size = 250,
+  image,
+  opacity = 1,
+}) => {
   return (
     <View style={styles.container}>
       <ButtonIcon
@@ -27,8 +25,42 @@ const MaskCameraOverlay: React.FC = () => {
           width: 60,
         }}
       />
+
+      {image && (
+        <Image
+          source={image}
+          style={[
+            styles.imageMask,
+            {
+              width: size,
+              height: size,
+              opacity,
+            },
+          ]}
+        />
+      )}
     </View>
   );
 };
 
 export default MaskCameraOverlay;
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
+  camIcon: {
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
+  },
+
+  imageMask: {
+    flex: 1,
+    resizeMode: 'contain',
+    position: 'relative',
+    alignSelf: 'center',
+    marginBottom: '20%',
+  },
+});
